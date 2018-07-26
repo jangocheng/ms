@@ -1,0 +1,10 @@
+.idea
+*/node_modules
+*.iml
+logs
+*/logs/
+*/*.iml
+*/target
+/target
+*/dist
+*/*.zip

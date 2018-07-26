@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dafy.lxp.ms.mapper.pub.ClientLogMapper" >
+  <resultMap id="BaseResultMap" type="com.dafy.lxp.ms.dto.pub.ClientLog" >
+    <id column="ID" property="id" jdbcType="BIGINT" />
+    <result column="UUID1" property="uuid1" jdbcType="VARCHAR" />
+    <result column="UUID2" property="uuid2" jdbcType="VARCHAR" />
+    <result column="USERID" property="userid" jdbcType="VARCHAR" />
+    <result column="USERPHONE" property="userphone" jdbcType="VARCHAR" />
+    <result column="LEVEL" property="level" jdbcType="VARCHAR" />
+    <result column="TITLE" property="title" jdbcType="VARCHAR" />
+    <result column="LOGTIME" property="logtime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.dafy.lxp.ms.dto.pub.ClientLog" extends="BaseResultMap" >
+    <result column="CONTENT" property="content" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, UUID1, UUID2, USERID, USERPHONE, LEVEL, TITLE, LOGTIME
+  </sql>
+  <sql id="Blob_Column_List" >
+    CONTENT
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from T_CLIENT_LOG
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from T_CLIENT_LOG
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.dafy.lxp.ms.dto.pub.ClientLog" >
+    insert into T_CLIENT_LOG (ID, UUID1, UUID2, 
+      USERID, USERPHONE, LEVEL, 
+      TITLE, LOGTIME, CONTENT
+      )
+    values (#{id,jdbcType=BIGINT}, #{uuid1,jdbcType=VARCHAR}, #{uuid2,jdbcType=VARCHAR}, 
+      #{userid,jdbcType=VARCHAR}, #{userphone,jdbcType=VARCHAR}, #{level,jdbcType=VARCHAR}, 
+      #{title,jdbcType=VARCHAR}, #{logtime,jdbcType=TIMESTAMP}, #{content,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.dafy.lxp.ms.dto.pub.ClientLog" >
+    insert into T_CLIENT_LOG
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="uuid1 != null" >
+        UUID1,
+      </if>
+      <if test="uuid2 != null" >
+        UUID2,
+      </if>
+      <if test="userid != null" >
+        USERID,
+      </if>
+      <if test="userphone != null" >
+        USERPHONE,
+      </if>
+      <if test="level != null" >
+        LEVEL,
+      </if>
+      <if test="title != null" >
+        TITLE,
+      </if>
+      <if test="logtime != null" >
+        LOGTIME,
+      </if>
+      <if test="content != null" >
+        CONTENT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="uuid1 != null" >
+        #{uuid1,jdbcType=VARCHAR},
+      </if>
+      <if test="uuid2 != null" >
+        #{uuid2,jdbcType=VARCHAR},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="userphone != null" >
+        #{userphone,jdbcType=VARCHAR},
+      </if>
+      <if test="level != null" >
+        #{level,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="logtime != null" >
+        #{logtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.dafy.lxp.ms.dto.pub.ClientLog" >
+    update T_CLIENT_LOG
+    <set >
+      <if test="uuid1 != null" >
+        UUID1 = #{uuid1,jdbcType=VARCHAR},
+      </if>
+      <if test="uuid2 != null" >
+        UUID2 = #{uuid2,jdbcType=VARCHAR},
+      </if>
+      <if test="userid != null" >
+        USERID = #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="userphone != null" >
+        USERPHONE = #{userphone,jdbcType=VARCHAR},
+      </if>
+      <if test="level != null" >
+        LEVEL = #{level,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null" >
+        TITLE = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="logtime != null" >
+        LOGTIME = #{logtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="content != null" >
+        CONTENT = #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.dafy.lxp.ms.dto.pub.ClientLog" >
+    update T_CLIENT_LOG
+    set UUID1 = #{uuid1,jdbcType=VARCHAR},
+      UUID2 = #{uuid2,jdbcType=VARCHAR},
+      USERID = #{userid,jdbcType=VARCHAR},
+      USERPHONE = #{userphone,jdbcType=VARCHAR},
+      LEVEL = #{level,jdbcType=VARCHAR},
+      TITLE = #{title,jdbcType=VARCHAR},
+      LOGTIME = #{logtime,jdbcType=TIMESTAMP},
+      CONTENT = #{content,jdbcType=LONGVARCHAR}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.dafy.lxp.ms.dto.pub.ClientLog" >
+    update T_CLIENT_LOG
+    set UUID1 = #{uuid1,jdbcType=VARCHAR},
+      UUID2 = #{uuid2,jdbcType=VARCHAR},
+      USERID = #{userid,jdbcType=VARCHAR},
+      USERPHONE = #{userphone,jdbcType=VARCHAR},
+      LEVEL = #{level,jdbcType=VARCHAR},
+      TITLE = #{title,jdbcType=VARCHAR},
+      LOGTIME = #{logtime,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectList" resultMap="ResultMapWithBLOBs" parameterType="java.util.Map">
+    select * from T_CLIENT_LOG t
+    <where>
+      <trim prefix="AND">
+        <if test="phoneNo != null">
+          t.USERPHONE like "%"#{phoneNo}"%"
+        </if>
+      </trim>
+      <trim prefix="AND">
+        <if test="date != null">
+          TO_DAYS(t.LOGTIME) = TO_DAYS(#{date})
+        </if>
+      </trim>
+    </where>
+  </select>
+</mapper>

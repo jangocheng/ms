@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dafy.lxp.ms.mapper.user.UserOpLogMapper" >
+  <resultMap id="BaseResultMap" type="com.dafy.lxp.ms.dto.user.UserOpLog" >
+    <id column="ID" property="id" jdbcType="BIGINT" />
+    <result column="PHONENO" property="phoneno" jdbcType="VARCHAR" />
+    <result column="OP_TYPE" property="opType" jdbcType="CHAR" />
+    <result column="OP_DESC" property="opDesc" jdbcType="VARCHAR" />
+    <result column="OP_TIME" property="opTime" jdbcType="TIMESTAMP" />
+    <result column="OP_DEVICE" property="opDevice" jdbcType="VARCHAR" />
+    <result column="OP_GPS" property="opGps" jdbcType="VARCHAR" />
+    <result column="DEVICE_MODEL" property="deviceModel" jdbcType="VARCHAR" />
+    <result column="OS_VERSION" property="osVersion" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, PHONENO, OP_TYPE, OP_DESC, OP_TIME, OP_DEVICE, OP_GPS, DEVICE_MODEL, OS_VERSION
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from T_USER_OP_LOG
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from T_USER_OP_LOG
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.dafy.lxp.ms.dto.user.UserOpLog" >
+    insert into T_USER_OP_LOG (ID, PHONENO, OP_TYPE, 
+      OP_DESC, OP_TIME, OP_DEVICE, 
+      OP_GPS, DEVICE_MODEL, OS_VERSION
+      )
+    values (#{id,jdbcType=BIGINT}, #{phoneno,jdbcType=VARCHAR}, #{opType,jdbcType=CHAR}, 
+      #{opDesc,jdbcType=VARCHAR}, #{opTime,jdbcType=TIMESTAMP}, #{opDevice,jdbcType=VARCHAR}, 
+      #{opGps,jdbcType=VARCHAR}, #{deviceModel,jdbcType=VARCHAR}, #{osVersion,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.dafy.lxp.ms.dto.user.UserOpLog" >
+    insert into T_USER_OP_LOG
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="phoneno != null" >
+        PHONENO,
+      </if>
+      <if test="opType != null" >
+        OP_TYPE,
+      </if>
+      <if test="opDesc != null" >
+        OP_DESC,
+      </if>
+      <if test="opTime != null" >
+        OP_TIME,
+      </if>
+      <if test="opDevice != null" >
+        OP_DEVICE,
+      </if>
+      <if test="opGps != null" >
+        OP_GPS,
+      </if>
+      <if test="deviceModel != null" >
+        DEVICE_MODEL,
+      </if>
+      <if test="osVersion != null" >
+        OS_VERSION,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="phoneno != null" >
+        #{phoneno,jdbcType=VARCHAR},
+      </if>
+      <if test="opType != null" >
+        #{opType,jdbcType=CHAR},
+      </if>
+      <if test="opDesc != null" >
+        #{opDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="opTime != null" >
+        #{opTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="opDevice != null" >
+        #{opDevice,jdbcType=VARCHAR},
+      </if>
+      <if test="opGps != null" >
+        #{opGps,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceModel != null" >
+        #{deviceModel,jdbcType=VARCHAR},
+      </if>
+      <if test="osVersion != null" >
+        #{osVersion,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.dafy.lxp.ms.dto.user.UserOpLog" >
+    update T_USER_OP_LOG
+    <set >
+      <if test="phoneno != null" >
+        PHONENO = #{phoneno,jdbcType=VARCHAR},
+      </if>
+      <if test="opType != null" >
+        OP_TYPE = #{opType,jdbcType=CHAR},
+      </if>
+      <if test="opDesc != null" >
+        OP_DESC = #{opDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="opTime != null" >
+        OP_TIME = #{opTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="opDevice != null" >
+        OP_DEVICE = #{opDevice,jdbcType=VARCHAR},
+      </if>
+      <if test="opGps != null" >
+        OP_GPS = #{opGps,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceModel != null" >
+        DEVICE_MODEL = #{deviceModel,jdbcType=VARCHAR},
+      </if>
+      <if test="osVersion != null" >
+        OS_VERSION = #{osVersion,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.dafy.lxp.ms.dto.user.UserOpLog" >
+    update T_USER_OP_LOG
+    set PHONENO = #{phoneno,jdbcType=VARCHAR},
+      OP_TYPE = #{opType,jdbcType=CHAR},
+      OP_DESC = #{opDesc,jdbcType=VARCHAR},
+      OP_TIME = #{opTime,jdbcType=TIMESTAMP},
+      OP_DEVICE = #{opDevice,jdbcType=VARCHAR},
+      OP_GPS = #{opGps,jdbcType=VARCHAR},
+      DEVICE_MODEL = #{deviceModel,jdbcType=VARCHAR},
+      OS_VERSION = #{osVersion,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+
+  <select id="selectList" resultMap="BaseResultMap" parameterType="java.util.Map">
+    select * from T_USER_OP_LOG t
+    <where>
+      <trim prefix="AND">
+        <if test="phoneNo != null">
+          t.PHONENO like "%"#{phoneNo}"%"
+        </if>
+      </trim>
+      <trim prefix="AND">
+        <if test="date != null">
+          TO_DAYS(t.OP_TIME) = TO_DAYS(#{date})
+        </if>
+      </trim>
+    </where>
+  </select>
+</mapper>

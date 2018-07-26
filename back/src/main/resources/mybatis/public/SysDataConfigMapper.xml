@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dafy.lxp.ms.mapper.pub.SysDataConfigMapper" >
+  <resultMap id="BaseResultMap" type="com.dafy.lxp.ms.dto.pub.SysDataConfig" >
+    <id column="ID" property="id" jdbcType="BIGINT" />
+    <result column="TYPE" property="type" jdbcType="VARCHAR" />
+    <result column="DESC" property="desc" jdbcType="VARCHAR" />
+    <result column="CODE" property="code" jdbcType="VARCHAR" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.dafy.lxp.ms.dto.pub.SysDataConfigWithBLOBs" extends="BaseResultMap" >
+    <result column="DATA" property="data" jdbcType="LONGVARCHAR" />
+    <result column="DATA_1" property="data1" jdbcType="LONGVARCHAR" />
+    <result column="DATA_2" property="data2" jdbcType="LONGVARCHAR" />
+    <result column="DATA_3" property="data3" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, `TYPE`, `DESC`, CODE, CREATE_TIME
+  </sql>
+  <sql id="Blob_Column_List" >
+    `DATA`, DATA_1, DATA_2, DATA_3
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from T_SYSDATA_CONFIG
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from T_SYSDATA_CONFIG
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.dafy.lxp.ms.dto.pub.SysDataConfigWithBLOBs" >
+    insert into T_SYSDATA_CONFIG (ID, TYPE, DESC, 
+      CODE, CREATE_TIME, DATA, 
+      DATA_1, DATA_2, DATA_3
+      )
+    values (#{id,jdbcType=BIGINT}, #{type,jdbcType=VARCHAR}, #{desc,jdbcType=VARCHAR}, 
+      #{code,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{data,jdbcType=LONGVARCHAR}, 
+      #{data1,jdbcType=LONGVARCHAR}, #{data2,jdbcType=LONGVARCHAR}, #{data3,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.dafy.lxp.ms.dto.pub.SysDataConfigWithBLOBs" >
+    insert into T_SYSDATA_CONFIG
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="type != null" >
+        TYPE,
+      </if>
+      <if test="desc != null" >
+        DESC,
+      </if>
+      <if test="code != null" >
+        CODE,
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="data != null" >
+        DATA,
+      </if>
+      <if test="data1 != null" >
+        DATA_1,
+      </if>
+      <if test="data2 != null" >
+        DATA_2,
+      </if>
+      <if test="data3 != null" >
+        DATA_3,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="desc != null" >
+        #{desc,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null" >
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="data != null" >
+        #{data,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="data1 != null" >
+        #{data1,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="data2 != null" >
+        #{data2,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="data3 != null" >
+        #{data3,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.dafy.lxp.ms.dto.pub.SysDataConfigWithBLOBs" >
+    update T_SYSDATA_CONFIG
+    <set >
+      <if test="type != null" >
+        `TYPE` = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="desc != null" >
+        `DESC` = #{desc,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null" >
+        CODE = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="data != null" >
+        `DATA` = #{data,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="data1 != null" >
+        DATA_1 = #{data1,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="data2 != null" >
+        DATA_2 = #{data2,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="data3 != null" >
+        DATA_3 = #{data3,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.dafy.lxp.ms.dto.pub.SysDataConfigWithBLOBs" >
+    update T_SYSDATA_CONFIG
+    set TYPE = #{type,jdbcType=VARCHAR},
+      DESC = #{desc,jdbcType=VARCHAR},
+      CODE = #{code,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      DATA = #{data,jdbcType=LONGVARCHAR},
+      DATA_1 = #{data1,jdbcType=LONGVARCHAR},
+      DATA_2 = #{data2,jdbcType=LONGVARCHAR},
+      DATA_3 = #{data3,jdbcType=LONGVARCHAR}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.dafy.lxp.ms.dto.pub.SysDataConfig" >
+    update T_SYSDATA_CONFIG
+    set TYPE = #{type,jdbcType=VARCHAR},
+      DESC = #{desc,jdbcType=VARCHAR},
+      CODE = #{code,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+
+  <select id="findAll" resultMap="ResultMapWithBLOBs" >
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from T_SYSDATA_CONFIG
+  </select>
+</mapper>

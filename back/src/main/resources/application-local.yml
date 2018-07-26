@@ -1,0 +1,115 @@
+#web服务器配置
+server:
+  port: 8888
+  undertow:
+    #io-threads: 128 #默认cpu核心数 最小2
+    worker-threads: 500 #默认io-threads * 8
+    #max-http-post-size:
+  session:
+    timeout: 300
+##日志配置
+logging:
+  file: logs/lxp-back-ms-dev.log
+  level:
+    root: ERROR
+    com.apache: DEBUG
+    com.dafy: DEBUG
+  pattern: #使用Spring源码里面的支持命令行高亮的logback语法
+  #${CONSOLE_LOG_PATTERN:-%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}}
+    console: '%d{yyyy-MM-dd HH:mm:ss.SSS} %clr(%5p) %clr(${PID:- }){magenta} %clr(-){faint} %clr([%t]){faint} %clr(%-40.40logger{39}){cyan} %clr([%L]) %clr(:){faint} %m%n%wEx'
+    file: '%d{yyyy-MM-dd HH:mm:ss.SSS} %5p ${PID:- } - [%t] %-40.40logger{39} [%L] : %m%n%wEx'
+#spring相关配置
+spring:
+  #数据源
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    ms:
+      write:
+        driverClassName: com.mysql.jdbc.Driver
+        url: jdbc:mysql://xjyc-svr2:3306/ms?useUnicode=true&characterEncoding=utf-8&useSSL=false
+        username: dafy_dev
+        password: dafy_mysql_123
+      read:
+        driverClassName: com.mysql.jdbc.Driver
+        url: jdbc:mysql://xjyc-svr1:3306/ms?useUnicode=true&characterEncoding=utf-8&useSSL=false
+        username: dafy_dev
+        password: dafy_mysql_123
+    public:
+      write:
+        driverClassName: com.mysql.jdbc.Driver
+        url: jdbc:mysql://xjyc-svr2:3306/public?useUnicode=true&characterEncoding=utf-8&useSSL=false
+        username: dafy_dev
+        password: dafy_mysql_123
+      read:
+        driverClassName: com.mysql.jdbc.Driver
+        url: jdbc:mysql://xjyc-svr1:3306/public?useUnicode=true&characterEncoding=utf-8&useSSL=false
+        username: dafy_dev
+        password: dafy_mysql_123
+    user:
+      write:
+        driverClassName: com.mysql.jdbc.Driver
+        url: jdbc:mysql://xjyc-svr2:3306/user?useUnicode=true&characterEncoding=utf-8&useSSL=false
+        username: dafy_dev
+        password: dafy_mysql_123
+      read:
+        driverClassName: com.mysql.jdbc.Driver
+        url: jdbc:mysql://xjyc-svr1:3306/user?useUnicode=true&characterEncoding=utf-8&useSSL=false
+        username: dafy_dev
+        password: dafy_mysql_123
+    loan:
+      write:
+        driverClassName: com.mysql.jdbc.Driver
+        url: jdbc:mysql://xjyc-svr2:3306/loan?useUnicode=true&characterEncoding=utf-8&useSSL=false
+        username: dafy_dev
+        password: dafy_mysql_123
+      read:
+        driverClassName: com.mysql.jdbc.Driver
+        url: jdbc:mysql://xjyc-svr1:3306/loan?useUnicode=true&characterEncoding=utf-8&useSSL=false
+        username: dafy_dev
+        password: dafy_mysql_123
+  #redis
+  redis:
+    host: xjyc-svr1
+    port: 6389
+  # dubbo相关配置
+#  dubbo:
+#    application:
+#      name: pub-provider
+#    registry:
+#      address: zookeeper://10.34.2.9:2181?backup=10.34.2.9:2182,10.34.2.9:2183
+#    protocol:
+#      name: dubbo
+#      port: -1
+#    scan: com.dafy.yihui.pub
+#    module.default: false
+  #文件上传限制
+  http.multipart:
+    max-file-size: 10Mb
+    max-request-size: 15Mb
+#本项目配置
+config:
+  #线程池配置
+  threadPool:
+    coreThreads: 9
+    maxThreads: 19
+    queueSize: 50
+
+
+modules:
+  loan:
+    spvListUrl: http://10.34.2.14:8091/api/fundPart/spv/querySpvFundList?curPage=%s&pageSize=%s
+    spvDownUrl: http://10.34.2.14:8091/api/fundPart/spv/updateSpvContractFundPart
+  public:
+    file:
+      assets_url: .lixiangpai888.com/
+#      url: https://test.lixiangpai888.com/api/file/upload
+#      fileTypes: jpg,jpeg,png,gif,mp4,mpeg4,xls,xlsx,pdf
+      aliyun-oss:
+        accessKeyId: 阿里云oos accessId
+        accessKeySecret: 阿里云oos key
+        endpoint: https://oss-cn-hangzhou.aliyuncs.com/
+        defaultBucket: assets-file
+        assets_url: .lixiangpai888.com/
+        #private public-read public-read-write
+        bucketAcl: public-read
+
