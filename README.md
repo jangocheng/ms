@@ -20,4 +20,5 @@
 
 ## 预览
 登录用户名密码：test/test123
-![登录后首页]()
+
+![登录后首页](https://github.com/k42jc/ms/raw/master/%E8%BF%9B%E5%85%A5%E7%B3%BB%E7%BB%9F%E9%A1%B5%E9%9D%A2.png)
